@@ -4,7 +4,7 @@ namespace WebUI.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-	public static IServiceCollection AddApplication(this IServiceCollection services)
+	public static IServiceCollection AddIdentityServerServices(this IServiceCollection services)
 	{
 		services
 			.AddIdentityServer()

@@ -5,7 +5,7 @@ public static class WebApplicationBuilderExtensions
 	public static WebApplicationBuilder ConfigureBuilder(this WebApplicationBuilder builder)
 	{
 		builder.Services
-			.AddApplication()
+			.AddIdentityServerServices()
 			.AddControllersWithViews();
 		
 		return builder;
