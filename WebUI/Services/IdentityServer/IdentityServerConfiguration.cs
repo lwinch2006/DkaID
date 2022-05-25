@@ -112,6 +112,11 @@ public static class IdentityServerConfiguration
 					{
 						"https://localhost:5556/signin-oidc"
 					},
+					PostLogoutRedirectUris =
+					{
+						"https://localhost:5556/signout-callback-oidc"	
+					},
+					FrontChannelLogoutUri = "https://localhost:5556/signout-oidc",
 					RequireConsent = true,
 					RequirePkce = false
 				}
