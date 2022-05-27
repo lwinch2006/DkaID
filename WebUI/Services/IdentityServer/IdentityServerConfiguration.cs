@@ -68,8 +68,8 @@ public static class IdentityServerConfiguration
 			.Range(1, 2)
 			.Select(t => t switch
 			{
-				1 => new ApiScope("blazor-book-server-app-api.read"),
-				2 => new ApiScope("blazor-book-server-app-api.write")
+				1 => new ApiScope("blazor-book-hosted-app-api.read"),
+				2 => new ApiScope("blazor-book-hosted-app-api.write")
 			});
 
 		return apiScopes;
@@ -83,12 +83,12 @@ public static class IdentityServerConfiguration
 			{
 				1 => new ApiResource
 				{
-					Name = "blazor-book-server-app-api",
-					DisplayName = "Blazor Book Server App API",
+					Name = "blazor-book-hosted-app-api",
+					DisplayName = "Blazor Book Hosted App API",
 					Scopes =
 					{
-						"blazor-book-server-app-api.read",
-						"blazor-book-server-app-api.write"
+						"blazor-book-hosted-app-api.read",
+						"blazor-book-hosted-app-api.write"
 					},
 				}
 			});
@@ -114,7 +114,7 @@ public static class IdentityServerConfiguration
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Address,
 						"roles",
-						"blazor-book-server-app-api.read"
+						"blazor-book-hosted-app-api.read"
 					},
 					RedirectUris =
 					{
