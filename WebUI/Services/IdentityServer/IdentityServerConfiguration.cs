@@ -23,7 +23,9 @@ public static class IdentityServerConfiguration
 					{
 						new Claim("given_name", "D"),
 						new Claim(JwtClaimTypes.Name, "D K"),
-						new Claim("family_name", "K")
+						new Claim("family_name", "K"),
+						new Claim("address", "Oslo, Norway"),
+						new Claim("role", "administrator")
 					}
 				},
 				2 => new TestUser
@@ -35,7 +37,9 @@ public static class IdentityServerConfiguration
 					{
 						new Claim("given_name", "D"),
 						new Claim(JwtClaimTypes.Name, "D K"),
-						new Claim("family_name", "K")
+						new Claim("family_name", "K"),
+						new Claim("address", "Stavanger, Norway"),
+						new Claim("role", "user")
 					}
 				}
 			});
@@ -46,11 +50,13 @@ public static class IdentityServerConfiguration
 	public static IEnumerable<IdentityResource> GetIdentityResources()
 	{
 		var identityResources = Enumerable
-			.Range(1, 2)
+			.Range(1, 4)
 			.Select<int, IdentityResource>(t => t switch
 			{
 				1 => new IdentityResources.OpenId(),
-				2 => new IdentityResources.Profile()
+				2 => new IdentityResources.Profile(),
+				3 => new IdentityResources.Address(),
+				4 => new IdentityResource(name: "roles", displayName: "Roles", userClaims: new []{ "role" })
 			});
 
 		return identityResources;
@@ -106,17 +112,19 @@ public static class IdentityServerConfiguration
 					{
 						IdentityServerConstants.StandardScopes.OpenId,
 						IdentityServerConstants.StandardScopes.Profile,
+						IdentityServerConstants.StandardScopes.Address,
+						"roles",
 						"blazor-book-server-app-api.read"
 					},
 					RedirectUris =
 					{
-						"https://localhost:5556/signin-oidc"
+						"https://localhost:5000/signin-oidc"
 					},
 					PostLogoutRedirectUris =
 					{
-						"https://localhost:5556/signout-callback-oidc"	
+						"https://localhost:5000/signout-callback-oidc"	
 					},
-					FrontChannelLogoutUri = "https://localhost:5556/signout-oidc",
+					FrontChannelLogoutUri = "https://localhost:5000/signout-oidc",
 					RequireConsent = true,
 					RequirePkce = false
 				}
