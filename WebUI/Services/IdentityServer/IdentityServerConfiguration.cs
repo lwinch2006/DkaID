@@ -99,7 +99,7 @@ public static class IdentityServerConfiguration
 	public static IEnumerable<Client> GetClients()
 	{
 		var clients = Enumerable
-			.Range(1, 1)
+			.Range(1, 2)
 			.Select(t => t switch
 			{
 				1 => new Client
@@ -127,6 +127,36 @@ public static class IdentityServerConfiguration
 					FrontChannelLogoutUri = "https://localhost:5000/signout-oidc",
 					RequireConsent = true,
 					RequirePkce = false
+				},
+				2 => new Client
+				{
+					ClientName = "Blazor Book WASM App",
+					ClientId = "blazor-book-wasm-app",
+					AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
+					ClientSecrets = { new Secret("u2u-secret".Sha512())},
+					AllowedScopes =
+					{
+						IdentityServerConstants.StandardScopes.OpenId,
+						IdentityServerConstants.StandardScopes.Profile,
+						IdentityServerConstants.StandardScopes.Address,
+						"roles",
+						"blazor-book-hosted-app-api.read"
+					},
+					RedirectUris =
+					{
+						"https://localhost:5001/authentication/login-callback"
+					},
+					PostLogoutRedirectUris =
+					{
+						"https://localhost:5001/authentication/logout-callback"	
+					},
+					AllowedCorsOrigins =
+					{
+						"https://localhost:5001"	
+					},
+					RequireConsent = false,
+					RequirePkce = true,
+					RequireClientSecret = false
 				}
 			});
 
